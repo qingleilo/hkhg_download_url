@@ -25,4 +25,4 @@ jobs:
 
       - name: Build and Deploy
         run: |
-          gunicorn -b 0.0.0.0:$PORT your_app:app  # 你的 Flask 应用程序的入口文件和应用实例
+          gunicorn -b 0.0.0.0:$PORT hkhg_download_url:app  # 你的 Flask 应用程序的入口文件和应用实例
