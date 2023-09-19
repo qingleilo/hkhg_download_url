@@ -1,0 +1,28 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master  # 设置你的主分支名称
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8  # 设置你的 Python 版本
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt  # 确保你的依赖在 requirements.txt 中定义
+          pip install gunicorn
+
+      - name: Build and Deploy
+        run: |
+          gunicorn -b 0.0.0.0:$PORT your_app:app  # 你的 Flask 应用程序的入口文件和应用实例
